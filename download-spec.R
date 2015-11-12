@@ -10,6 +10,7 @@ query.from.list <- function(l){
 }
 
 download.from.db <- function(id, query){
+    require(RCurl)
     require(data.table)
     qjson <- minify(query)
     qjson.url <- URLencode(qjson)
@@ -33,7 +34,7 @@ search.db.id <- function(query){
     }
     db.items <- db.raw$items
     db.dat <- flatten(db.items)
-    db.out <- db.dat[, c("_id", "ecosis.package_title", "ecosis.package_name")]
+    db.out <- db.dat[, c("_id", "ecosis.package_title", "ecosis.package_name", "ecosis.spectra_count")]
     return(db.out)
 }
 
